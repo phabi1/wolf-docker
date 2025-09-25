@@ -25,11 +25,11 @@ services:
       - public
     volumes:
       - wordpress_data:/var/www/html
-      - ./plugins/wolf-core:/var/www/html/wp-content/plugins/wolf-core:rw
-      - ./plugins/wolf-checkout:/var/www/html/wp-content/plugins/wolf-checkout:rw
-      - ./plugins/wolf-events:/var/www/html/wp-content/plugins/wolf-events:rw
-      - ./plugins/wolf-subscriptions:/var/www/html/wp-content/plugins/wolf-subscriptions:rw
-      - ./themes/wolf:/var/www/html/wp-content/themes/wolf:rw
+      - ../plugins/wolf-core:/var/www/html/wp-content/plugins/wolf-core:rw
+      - ../plugins/wolf-checkout:/var/www/html/wp-content/plugins/wolf-checkout:rw
+      - ../plugins/wolf-events:/var/www/html/wp-content/plugins/wolf-events:rw
+      - ../plugins/wolf-subscriptions:/var/www/html/wp-content/plugins/wolf-subscriptions:rw
+      - ../themes/wolf:/var/www/html/wp-content/themes/wolf:rw
     labels:
       - traefik.enable=true
       - traefik.http.routers.wordpress.rule=Host(`wolf.docker.localhost`)
