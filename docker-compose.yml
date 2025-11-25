@@ -1,23 +1,25 @@
+name: wolfs
 services:
   mysql:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
+      - MYSQL_USER=${WORDPRESS_DB_USER}
+      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
     networks:
       - private
     volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
       - mysql_data:/var/lib/mysql
   wordpress:
     build:
       context: ./wordpress
     environment:
       WORDPRESS_DB_HOST: ${MYSQL_HOST}:${MYSQL_PORT}
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_DEBUG: 1
     depends_on:
       - mysql
@@ -26,7 +28,7 @@ services:
       - public
     volumes:
       - wordpress_data:/var/www/html
-      - ./mail.ini:/usr/local/etc/php/conf.d/mail.ini:ro
+      - ./wordpress/mail.ini:/usr/local/etc/php/conf.d/mail.ini:ro
       - ../plugins/wolf-core:/var/www/html/wp-content/plugins/wolf-core:rw
       - ../plugins/wolf-checkout:/var/www/html/wp-content/plugins/wolf-checkout:rw
       - ../plugins/wolf-events:/var/www/html/wp-content/plugins/wolf-events:rw
