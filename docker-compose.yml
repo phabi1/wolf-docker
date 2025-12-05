@@ -31,8 +31,11 @@ services:
       - ./wordpress/mail.ini:/usr/local/etc/php/conf.d/mail.ini:ro
       - ../plugins/wolf-core:/var/www/html/wp-content/plugins/wolf-core:rw
       - ../plugins/wolf-checkout:/var/www/html/wp-content/plugins/wolf-checkout:rw
-      - ../plugins/wolf-events:/var/www/html/wp-content/plugins/wolf-events:rw
-      - ../plugins/wolf-subscriptions:/var/www/html/wp-content/plugins/wolf-subscriptions:rw
+      - ../plugins/wolf-event:/var/www/html/wp-content/plugins/wolf-event:rw
+      - ../plugins/wolf-subscription:/var/www/html/wp-content/plugins/wolf-subscription:rw
+      - ../plugins/wolf-contact:/var/www/html/wp-content/plugins/wolf-contact:rw
+      - ../plugins/wolf-blocks:/var/www/html/wp-content/plugins/wolf-blocks:rw
+      - ../plugins/wolf-forms:/var/www/html/wp-content/plugins/wolf-forms:rw
       - ../themes/wolf:/var/www/html/wp-content/themes/wolf:rw
     labels:
       - traefik.enable=true
